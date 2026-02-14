@@ -8,12 +8,12 @@ export function CaptainAmericaModel(props) {
   const fbx = useLoader(FBXLoader, 'models/captain/cap.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
-  // High-fidelity textures
-  const colorMap = useTexture('models/captain/mat0_c.jpg.png', (t) => {
+  // High-fidelity LEGO textures - FIXED PATHS
+  const colorMap = useTexture('models/captain/mat0_c.png', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
   })
-  const normalMap = useTexture('models/captain/mat0_n.jpg.png', (t) => {
+  const normalMap = useTexture('models/captain/mat0_n.png', (t) => {
     t.flipY = false
   })
 

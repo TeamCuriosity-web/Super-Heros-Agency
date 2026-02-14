@@ -1,27 +1,37 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useLoader } from '@react-three/fiber'
-import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function SupermanModel(props) {
-  const result = useLoader(ColladaLoader, 'models/superman/20220201_034554.dae')
-  const scene = result ? result.scene : null
+  const fbx = useLoader(FBXLoader, 'models/superman_new/superman.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
-  useLayoutEffect(() => {
-    if (!scene) return
+  // High-fidelity Texture
+  const colorMap = useTexture('models/superman_new/body_d.png', (texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace
+    texture.flipY = false
+  })
 
-    scene.traverse((child) => {
+  useLayoutEffect(() => {
+    if (!fbx) return
+
+    fbx.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.DoubleSide
-        child.material.needsUpdate = true
-        child.updateMatrixWorld(true)
+        const newMat = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          side: THREE.DoubleSide,
+          color: 0xffffff,
+          roughness: 0.6,
+          metalness: 0.3
+        })
+        child.material = newMat
       }
     })
 
-    // Compute bounding box from MESHES ONLY to fix "structure" and alignment
     const box = new THREE.Box3()
-    scene.traverse((child) => {
+    fbx.traverse((child) => {
       if (child.isMesh) {
         child.geometry.computeBoundingBox()
         const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
@@ -29,11 +39,12 @@ export function SupermanModel(props) {
       }
     })
 
-    if (box.isEmpty()) box.setFromObject(scene)
+    if (box.isEmpty()) box.setFromObject(fbx)
 
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
+    // Standardize to 4.5 units height
     const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     
@@ -41,14 +52,12 @@ export function SupermanModel(props) {
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
     })
-  }, [scene])
-
-  if (!scene) return null
+  }, [fbx, colorMap])
 
   return (
     <group {...props}>
       <group position={[0, -2, 0]} scale={transform.scale}>
-        <primitive object={scene} position={transform.offset} />
+        <primitive object={fbx} position={transform.offset} />
       </group>
     </group>
   )

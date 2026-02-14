@@ -4,7 +4,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import * as THREE from 'three'
 
 export function ThorModel(props) {
-  const obj = useLoader(OBJLoader, 'models/thor/LEGO_Thor.obj')
+  const obj = useLoader(OBJLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.obj')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
