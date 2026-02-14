@@ -15,6 +15,17 @@ export function SpiderManModel(props) {
 
   useLayoutEffect(() => {
     if (!obj) return
+
+    // Ensure materials are visible and textures are mapped correctly
+    obj.traverse((child) => {
+      if (child.isMesh) {
+        // Boost visibility for dark models
+        child.material.emissiveIntensity = 0.2
+        child.material.emissive = new THREE.Color(0x333333)
+        child.material.needsUpdate = true
+      }
+    })
+
     const box = new THREE.Box3().setFromObject(obj)
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
@@ -37,5 +48,3 @@ export function SpiderManModel(props) {
     </group>
   )
 }
-
-

@@ -18,8 +18,10 @@ export function ModelViewer({ ModelComponent, cameraTarget = [0, 0, 0] }) {
           dpr={[1, 2]} 
           camera={{ position: [0, 0, 7], fov: 45 }} 
         >
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={100} castShadow shadow-mapSize={[512, 512]} />
+          <ambientLight intensity={1.5} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={200} castShadow shadow-mapSize={[512, 512]} />
+          <pointLight position={[-10, -10, -10]} intensity={50} />
+          <pointLight position={[0, 2, 5]} intensity={100} color="#ffffff" />
           <ModelComponent />
           <Environment preset="city" />
           <ContactShadows position={[0, -0.9, 0]} opacity={0.4} scale={10} blur={2.8} far={4} resolution={128} />

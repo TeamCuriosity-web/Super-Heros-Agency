@@ -1,14 +1,20 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useLayoutEffect, useState } from 'react'
+import { useGLTF, Clone } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function HulkModel(props) {
   const { scene } = useGLTF('models/hulk/lego_hulk.glb')
-  const groupRef = useRef()
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
     if (!scene) return
+    
+    // Reset any previous modifications to the cached scene
+    scene.position.set(0, 0, 0)
+    scene.scale.set(1, 1, 1)
+    scene.rotation.set(0, 0, 0)
+    scene.updateMatrixWorld()
+
     const box = new THREE.Box3().setFromObject(scene)
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
@@ -25,7 +31,7 @@ export function HulkModel(props) {
   return (
     <group {...props} dispose={null}>
       <group position={[0, 1.2, 0]} scale={transform.scale}>
-        <primitive object={scene} position={transform.offset} />
+        <Clone object={scene} position={transform.offset} />
       </group>
     </group>
   )
