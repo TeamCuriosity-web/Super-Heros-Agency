@@ -5,16 +5,11 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function SpiderManModel(props) {
-  const materials = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HER_MMO_ULT_B_D.mtl', (loader) => {
-    // Note: I'm using the original mtl but will override the transparency in the layout effect
-  })
-  
-  // Actually, let's load the MTL and handle the fix
-  const materialsLoaded = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.mtl')
+  const materials = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.mtl')
 
   const obj = useLoader(OBJLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.obj', (loader) => {
-    materialsLoaded.preload()
-    loader.setMaterials(materialsLoaded)
+    materials.preload()
+    loader.setMaterials(materials)
   })
   
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
