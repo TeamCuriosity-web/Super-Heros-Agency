@@ -1,29 +1,41 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useLoader } from '@react-three/fiber'
-import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function SupermanModel(props) {
-  // REVERTING TO THE ORIGINAL DAE MODEL FOR AUTHENTIC COLORS
-  const result = useLoader(ColladaLoader, 'models/superman_original/superman.dae')
-  const scene = result ? result.scene : null
+  // Loading high-fidelity model but FORCING original LEGO colors
+  const fbx = useLoader(FBXLoader, 'models/superman_new/superman.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
-  useLayoutEffect(() => {
-    if (!scene) return
+  // High-fidelity LEGO texture
+  const colorMap = useTexture('models/superman_new/body_d.png', (t) => {
+    t.colorSpace = THREE.SRGBColorSpace
+    t.flipY = false
+  })
 
-    scene.traverse((child) => {
+  useLayoutEffect(() => {
+    if (!fbx) return
+
+    fbx.traverse((child) => {
       if (child.isMesh) {
-        // ENHANCEMENT: Lock materials to original definitions but ensure visibility
-        child.material.side = THREE.DoubleSide
-        child.material.needsUpdate = true
-        child.updateMatrixWorld(true)
+        // We override materials to ensure the "Original Colors" request is met
+        // while using the higher quality mesh.
+        const newMat = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          side: THREE.DoubleSide,
+          color: 0xffffff, // Tint with white to let map show
+          roughness: 0.7,
+          metalness: 0.1
+        })
+        child.material = newMat
       }
     })
 
-    // Mesh-only bounding box for perfect 4.5u alignment
+    // Compute bounding box from MESHES ONLY
     const box = new THREE.Box3()
-    scene.traverse((child) => {
+    fbx.traverse((child) => {
       if (child.isMesh) {
         child.geometry.computeBoundingBox()
         const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
@@ -31,12 +43,12 @@ export function SupermanModel(props) {
       }
     })
 
-    if (box.isEmpty()) box.setFromObject(scene)
+    if (box.isEmpty()) box.setFromObject(fbx)
 
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
-    // Standardize to 4.5 units height
+    // Standardize to 4.5 units height for roster consistency
     const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     
@@ -44,14 +56,12 @@ export function SupermanModel(props) {
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
     })
-  }, [scene])
-
-  if (!scene) return null
+  }, [fbx, colorMap])
 
   return (
     <group {...props}>
       <group position={[0, -2, 0]} scale={transform.scale}>
-        <primitive object={scene} position={transform.offset} />
+        <primitive object={fbx} position={transform.offset} />
       </group>
     </group>
   )
