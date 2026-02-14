@@ -48,18 +48,18 @@ export function Gallery() {
         className="absolute inset-0 z-0 bg-cover bg-center scale-110"
         style={{ 
           backgroundImage: 'url("https://images.unsplash.com/photo-1624213111452-35e8d3d5cc18?q=70&w=1600&auto=format&fit=crop")',
-          filter: 'brightness(0.9) contrast(1.1) saturate(0.2)'
+          filter: 'brightness(1) contrast(1.1) saturate(0.3)'
         }} 
       />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white z-10"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_50%,_white_100%)] z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-white z-10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_60%,_white_100%)] z-10"></div>
 
       <div ref={textRef} className="relative z-20 text-center px-4">
         <h2 className="text-red-600 font-bold tracking-[0.5em] text-sm md:text-xl mb-4 uppercase">
           The Legacy
         </h2>
-        <h1 className="text-6xl md:text-9xl font-black text-black tracking-tighter mb-8 stroke-text-black uppercase">
+        <h1 className="text-6xl md:text-9xl font-black text-slate-900 tracking-tighter mb-8 stroke-text-black uppercase">
           Gallery
         </h1>
         <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-medium">
