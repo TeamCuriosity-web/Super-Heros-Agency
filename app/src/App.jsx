@@ -6,7 +6,7 @@ import { Gallery } from './components/ui/Gallery'
 
 function App() {
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-white min-h-screen">
       <Navbar />
       <HeroSection />
       <Missions />

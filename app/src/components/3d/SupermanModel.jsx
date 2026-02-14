@@ -58,6 +58,8 @@ export function SupermanModel(props) {
     })
   }, [fbx, colorMap])
 
+  if (!fbx) return null
+
   return (
     <group {...props}>
       <group position={[0, -2, 0]} scale={transform.scale}>

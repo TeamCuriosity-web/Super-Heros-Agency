@@ -38,23 +38,23 @@ export function Missions() {
   }, [])
 
   return (
-    <section id="missions" ref={containerRef} className="w-full min-h-screen bg-black relative py-24 px-8 md:px-16 overflow-hidden">
+    <section id="missions" ref={containerRef} className="w-full min-h-screen bg-slate-50 relative py-24 px-8 md:px-16 overflow-hidden">
       {/* Background Grid/Effect */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+      <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+        backgroundImage: 'radial-gradient(#000000 1px, transparent 1px)',
         backgroundSize: '40px 40px'
       }}></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
           <div>
             <span className="text-red-600 font-mono text-sm tracking-widest uppercase mb-2 block">Tactical Status</span>
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-              Heroic <span className="text-transparent border-t-2 border-b-2 border-red-600 px-2" style={{ WebkitTextStroke: '1px white' }}>Missions</span>
+            <h2 className="text-5xl md:text-7xl font-black text-black tracking-tighter uppercase leading-none">
+              Heroic <span className="text-transparent border-t-2 border-b-2 border-red-600 px-2" style={{ WebkitTextStroke: '1px black' }}>Missions</span>
             </h2>
           </div>
           <div className="text-right">
-            <span className="text-gray-500 font-mono text-sm">UPTIME: 99.9%</span>
+            <span className="text-slate-400 font-mono text-sm">UPTIME: 99.9%</span>
             <div className="h-1 w-32 bg-red-600 mt-2 ml-auto"></div>
           </div>
         </div>
@@ -65,28 +65,28 @@ export function Missions() {
               key={mission.id} 
               ref={el => cardsRef.current[index] = el}
               onClick={() => setSelectedMission(mission)}
-              className={`group relative bg-white/5 border border-white/10 p-8 rounded-sm cursor-pointer transition-all duration-500 overflow-hidden ${selectedMission?.id === mission.id ? 'bg-white/15 border-white/30 scale-[1.02]' : 'hover:bg-white/10'}`}
+              className={`group relative bg-white border border-black/5 p-8 rounded-sm cursor-pointer transition-all duration-500 overflow-hidden shadow-sm ${selectedMission?.id === mission.id ? 'bg-white border-red-500/30 scale-[1.02] shadow-xl' : 'hover:shadow-md hover:border-black/10'}`}
             >
               {/* Scanline Effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent h-[2px] w-full animate-scanline opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[2px] w-full animate-scanline opacity-10"></div>
               
               <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${mission.status === 'ACTIVE' ? 'bg-green-500 animate-pulse' : mission.status === 'COMPLETED' ? 'bg-blue-500' : 'bg-gray-500'}`}></div>
-                  <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase">{mission.status}</span>
+                  <div className={`w-2 h-2 rounded-full ${mission.status === 'ACTIVE' ? 'bg-green-500 animate-pulse' : mission.status === 'COMPLETED' ? 'bg-blue-500' : 'bg-slate-300'}`}></div>
+                  <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">{mission.status}</span>
                 </div>
-                <span className="text-xs text-gray-600 font-mono">#{mission.id.toString().padStart(3, '0')}</span>
+                <span className="text-xs text-slate-300 font-mono">#{mission.id.toString().padStart(3, '0')}</span>
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">{mission.title}</h3>
-              <p className="text-gray-400 text-sm mb-8 leading-relaxed h-12 overflow-hidden">{mission.desc}</p>
+              <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-red-500 transition-colors uppercase tracking-tight">{mission.title}</h3>
+              <p className="text-slate-500 text-sm mb-8 leading-relaxed h-12 overflow-hidden">{mission.desc}</p>
               
-              <div className="flex justify-between items-center pt-4 border-t border-white/10">
+              <div className="flex justify-between items-center pt-4 border-t border-black/5">
                 <div className="flex flex-col">
-                  <span className="text-[9px] text-gray-500 uppercase">Danger</span>
-                  <span className="text-xs font-bold text-white tracking-wider" style={{ color: mission.color }}>{mission.danger}</span>
+                  <span className="text-[9px] text-slate-400 uppercase">Danger</span>
+                  <span className="text-xs font-bold tracking-wider" style={{ color: mission.color }}>{mission.danger}</span>
                 </div>
-                <button className="text-[10px] font-black text-white border border-white/20 px-4 py-2 hover:bg-white hover:text-black transition-all uppercase tracking-tighter">
+                <button className="text-[10px] font-black text-black border border-black/10 px-4 py-2 hover:bg-black hover:text-white transition-all uppercase tracking-tighter">
                   View Intel
                 </button>
               </div>
@@ -97,30 +97,30 @@ export function Missions() {
 
       {/* Mission Detail Overlay */}
       {selectedMission && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-8 bg-black/90 backdrop-blur-xl">
-          <div className="max-w-2xl w-full bg-zinc-900 border border-red-600/30 p-12 relative">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-8 bg-black/5 backdrop-blur-xl">
+          <div className="max-w-2xl w-full bg-white border border-black/5 shadow-2xl p-12 relative animate-in fade-in zoom-in duration-300">
             <button 
               onClick={() => setSelectedMission(null)}
-              className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors"
+              className="absolute top-6 right-6 text-slate-400 hover:text-black transition-colors"
             >
               [ CLOSE ]
             </button>
             <span className="text-red-600 font-mono text-sm tracking-widest uppercase mb-4 block">Classified Intel</span>
-            <h3 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">{selectedMission.title}</h3>
-            <p className="text-gray-300 text-lg leading-relaxed mb-8">{selectedMission.desc}</p>
+            <h3 className="text-4xl font-black text-black mb-6 uppercase tracking-tighter">{selectedMission.title}</h3>
+            <p className="text-slate-600 text-lg leading-relaxed mb-8">{selectedMission.desc}</p>
             
-            <div className="grid grid-cols-2 gap-8 py-8 border-y border-white/10 mb-8">
+            <div className="grid grid-cols-2 gap-8 py-8 border-y border-black/5 mb-8">
               <div>
-                <span className="text-gray-500 text-xs uppercase block mb-1">Status</span>
-                <span className="text-white font-bold">{selectedMission.status}</span>
+                <span className="text-slate-400 text-xs uppercase block mb-1">Status</span>
+                <span className="text-black font-bold">{selectedMission.status}</span>
               </div>
               <div>
-                <span className="text-gray-500 text-xs uppercase block mb-1">Danger Level</span>
+                <span className="text-slate-400 text-xs uppercase block mb-1">Danger Level</span>
                 <span className="font-bold" style={{ color: selectedMission.color }}>{selectedMission.danger}</span>
               </div>
             </div>
             
-            <button className="w-full bg-red-600 text-white font-black py-4 hover:bg-red-700 transition-colors uppercase tracking-widest">
+            <button className="w-full bg-red-600 text-white font-black py-4 hover:bg-black transition-all uppercase tracking-widest">
               Commence Mission
             </button>
           </div>

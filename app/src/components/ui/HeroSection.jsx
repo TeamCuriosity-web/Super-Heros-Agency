@@ -137,10 +137,10 @@ export function HeroSection() {
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black text-white transition-colors duration-700">
+    <div className="relative w-full h-screen overflow-hidden bg-white text-black transition-colors duration-700">
       {/* Background Gradient Layer */}
       <div 
-        className={`absolute inset-0 transition-opacity duration-1000 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} opacity-40`}
+        className={`absolute inset-0 transition-opacity duration-1000 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} opacity-20`}
       />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
@@ -157,12 +157,12 @@ export function HeroSection() {
           
           {/* Navigation Arrows */}
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-8 z-50">
-            <button onClick={prevHero} className="text-white/50 hover:text-white transition-colors">
+            <button onClick={prevHero} className="text-black/50 hover:text-black transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
             </button>
-            <button onClick={nextHero} className="text-white/50 hover:text-white transition-colors">
+            <button onClick={nextHero} className="text-black/50 hover:text-black transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
@@ -187,7 +187,7 @@ export function HeroSection() {
                 {hero.name} <br />
                 <span className={hero.textColor}>{hero.name2}</span>
               </h1>
-              <p className="text-gray-400 text-xs md:text-base max-w-lg mb-8 leading-relaxed">
+              <p className="text-slate-600 text-xs md:text-base max-w-lg mb-8 leading-relaxed">
                 {hero.description}
               </p>
               
@@ -196,25 +196,25 @@ export function HeroSection() {
                   BOOK NOW
                 </button>
                 <button 
-                  className="px-8 py-3 border border-white/20 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider"
+                  className="px-8 py-3 border border-black/10 text-black font-bold text-sm rounded-none transition-all duration-300 hover:bg-black/5 tracking-wider"
                   style={{ borderColor: `${hero.strokeColor}33` }}
                 >
                   CONTACT AGENT
                 </button>
               </div>
               
-              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-white/10 pt-4">
+              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-black/5 pt-4">
                  <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Strength</h4>
-                   <p className="text-lg font-bold text-white">{hero.stats.strength}</p>
+                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Strength</h4>
+                   <p className="text-lg font-bold text-black">{hero.stats.strength}</p>
                  </div>
                  <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Speed</h4>
-                   <p className="text-lg font-bold text-white">{hero.stats.speed}</p>
+                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Speed</h4>
+                   <p className="text-lg font-bold text-black">{hero.stats.speed}</p>
                  </div>
                  <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Tech</h4>
-                   <p className="text-lg font-bold text-white">{hero.stats.tech}</p>
+                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Tech</h4>
+                   <p className="text-lg font-bold text-black">{hero.stats.tech}</p>
                  </div>
               </div>
             </motion.div>

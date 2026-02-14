@@ -41,31 +41,31 @@ export function Gallery() {
   }, [])
 
   return (
-    <div id="gallery" ref={containerRef} className="w-full h-screen relative overflow-hidden flex items-center justify-center">
+    <div id="gallery" ref={containerRef} className="w-full h-screen relative overflow-hidden flex items-center justify-center bg-white">
       {/* Background Image with Parallax */}
       <div 
         ref={imageRef}
         className="absolute inset-0 z-0 bg-cover bg-center scale-110"
         style={{ 
           backgroundImage: 'url("https://images.unsplash.com/photo-1624213111452-35e8d3d5cc18?q=70&w=1600&auto=format&fit=crop")',
-          filter: 'brightness(0.3) saturate(0)'
+          filter: 'brightness(0.9) contrast(1.1) saturate(0.2)'
         }} 
       />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_50%,_black_100%)] z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white z-10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_50%,_white_100%)] z-10"></div>
 
       <div ref={textRef} className="relative z-20 text-center px-4">
         <h2 className="text-red-600 font-bold tracking-[0.5em] text-sm md:text-xl mb-4 uppercase">
           The Legacy
         </h2>
-        <h1 className="text-6xl md:text-9xl font-black text-white tracking-tighter mb-8 stroke-text-white">
-          GALLERY
+        <h1 className="text-6xl md:text-9xl font-black text-black tracking-tighter mb-8 stroke-text-black uppercase">
+          Gallery
         </h1>
-        <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
+        <p className="text-slate-600 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-medium">
           Witness the evolution of Earth's Mightiest Heroes through the ages. From the first suit to the final sacrifice.
         </p>
-        <button className="mt-8 px-12 py-4 border border-white/30 text-white font-bold tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+        <button className="mt-8 px-12 py-4 border border-black/20 text-black font-black tracking-widest hover:bg-black hover:text-white transition-all duration-300 uppercase text-xs">
           VIEW ARCHIVE
         </button>
       </div>
