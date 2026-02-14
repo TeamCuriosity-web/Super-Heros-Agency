@@ -40,7 +40,7 @@ export function HulkModel(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group position={[0, -3.2, 0]} scale={transform.scale}>
+      <group position={[0, -2, 0]} scale={transform.scale}>
         <Clone object={scene} position={transform.offset} />
       </group>
     </group>
