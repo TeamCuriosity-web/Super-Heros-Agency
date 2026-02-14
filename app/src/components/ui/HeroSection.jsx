@@ -120,7 +120,11 @@ export function HeroSection() {
   }
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} text-white transition-colors duration-700`}>
+    <div className="relative w-full h-screen overflow-hidden bg-black text-white transition-colors duration-700">
+      {/* Background Gradient Layer */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-1000 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} opacity-40`}
+      />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
         <h1 className="text-[25vw] font-black tracking-tighter text-transparent stroke-text uppercase select-none transition-colors duration-700"
@@ -174,8 +178,10 @@ export function HeroSection() {
                 <button className={`px-8 py-3 ${hero.buttonColor} text-white font-bold text-sm rounded-none transition-all duration-300 transform hover:-translate-y-1 ${hero.shadowColor} tracking-wider`}>
                   BOOK NOW
                 </button>
-                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.strokeColor} text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}
-                        style={{ '--hover-color': hero.strokeColor } }>
+                <button 
+                  className="px-8 py-3 border border-white/20 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider"
+                  style={{ borderColor: `${hero.strokeColor}33` }}
+                >
                   CONTACT AGENT
                 </button>
               </div>
