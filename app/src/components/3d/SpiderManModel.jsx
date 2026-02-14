@@ -5,10 +5,16 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function SpiderManModel(props) {
-  const materials = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.mtl')
+  const materials = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HER_MMO_ULT_B_D.mtl', (loader) => {
+    // Note: I'm using the original mtl but will override the transparency in the layout effect
+  })
+  
+  // Actually, let's load the MTL and handle the fix
+  const materialsLoaded = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.mtl')
+
   const obj = useLoader(OBJLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.obj', (loader) => {
-    materials.preload()
-    loader.setMaterials(materials)
+    materialsLoaded.preload()
+    loader.setMaterials(materialsLoaded)
   })
   
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
@@ -16,12 +22,19 @@ export function SpiderManModel(props) {
   useLayoutEffect(() => {
     if (!obj) return
 
-    // Ensure materials are visible and textures are mapped correctly
     obj.traverse((child) => {
       if (child.isMesh) {
+        // CRITICAL FIX: The MTL file has 'd 0.000' for weapon/accessories making them invisible
+        child.material.transparent = false
+        child.material.opacity = 1.0
+        child.material.alphaTest = 0.5
+        
         // Boost visibility for dark models
-        child.material.emissiveIntensity = 0.2
-        child.material.emissive = new THREE.Color(0x333333)
+        child.material.emissiveIntensity = 0.15
+        child.material.emissive = new THREE.Color(0xffffff)
+        
+        // Ensure double sided
+        child.material.side = THREE.DoubleSide
         child.material.needsUpdate = true
       }
     })
