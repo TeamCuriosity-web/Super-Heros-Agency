@@ -8,12 +8,12 @@ export function CaptainAmericaModel(props) {
   const fbx = useLoader(FBXLoader, 'models/captain/cap.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
-  // High-fidelity LEGO textures - FIXED PATHS
-  const colorMap = useTexture('models/captain/mat0_c.png', (t) => {
+  // High-fidelity LEGO textures - Restored to .jpg to satisfy internal FBX loader paths
+  const colorMap = useTexture('models/captain/mat0_c.jpg', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
   })
-  const normalMap = useTexture('models/captain/mat0_n.png', (t) => {
+  const normalMap = useTexture('models/captain/mat0_n.jpg', (t) => {
     t.flipY = false
   })
 
@@ -22,20 +22,19 @@ export function CaptainAmericaModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        // Force fresh materials to ensure "real colors" show up correctly
-        const newMat = new THREE.MeshStandardMaterial({
+        // Use MeshPhongMaterial for better FBX metadata compatibility
+        const newMat = new THREE.MeshPhongMaterial({
           map: colorMap,
           normalMap: normalMap,
           side: THREE.DoubleSide,
           color: 0xffffff,
-          roughness: 0.6,
-          metalness: 0.3
+          shininess: 50
         })
         child.material = newMat
+        child.material.needsUpdate = true
       }
     })
 
-    // Compute bounding box from MESHES ONLY
     const box = new THREE.Box3()
     fbx.traverse((child) => {
       if (child.isMesh) {
@@ -50,7 +49,6 @@ export function CaptainAmericaModel(props) {
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
-    // Standardize to 4.5 units height
     const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     

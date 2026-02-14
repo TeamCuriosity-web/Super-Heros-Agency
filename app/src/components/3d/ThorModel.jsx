@@ -1,10 +1,16 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useLoader } from '@react-three/fiber'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function ThorModel(props) {
-  const obj = useLoader(OBJLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.obj')
+  const materials = useLoader(MTLLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.mtl')
+  const obj = useLoader(OBJLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.obj', (loader) => {
+    materials.preload()
+    loader.setMaterials(materials)
+  })
+  
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
@@ -17,7 +23,6 @@ export function ThorModel(props) {
       }
     })
 
-    // Compute bounding box from MESHES ONLY
     const box = new THREE.Box3()
     obj.traverse((child) => {
       if (child.isMesh) {
@@ -39,7 +44,7 @@ export function ThorModel(props) {
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
     })
-  }, [obj])
+  }, [obj, materials])
 
   return (
     <group {...props}>

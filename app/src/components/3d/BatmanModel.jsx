@@ -1,10 +1,15 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useLoader } from '@react-three/fiber'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function BatmanModel(props) {
-  const obj = useLoader(OBJLoader, 'models/batman/lego-batman.obj')
+  const materials = useLoader(MTLLoader, 'models/batman/Untitled Model.mtl')
+  const obj = useLoader(OBJLoader, 'models/batman/lego-batman.obj', (loader) => {
+    materials.preload()
+    loader.setMaterials(materials)
+  })
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
@@ -13,14 +18,10 @@ export function BatmanModel(props) {
     obj.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.DoubleSide
-        // Emissive boost for dark colors
-        child.material.emissive = child.material.color
-        child.material.emissiveIntensity = 0.2
         child.material.needsUpdate = true
       }
     })
 
-    // Compute bounding box from MESHES ONLY
     const box = new THREE.Box3()
     obj.traverse((child) => {
       if (child.isMesh) {
@@ -42,7 +43,7 @@ export function BatmanModel(props) {
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
     })
-  }, [obj])
+  }, [obj, materials])
 
   return (
     <group {...props}>
