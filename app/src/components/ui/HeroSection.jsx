@@ -3,6 +3,7 @@ import { ModelViewer } from '../3d/ModelViewer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IronManModel } from '../3d/IronManModel'
 import { HulkModel } from '../3d/HulkModel'
+import { BatmanModel } from '../3d/BatmanModel'
 
 const heroes = [
   {
@@ -36,6 +37,22 @@ const heroes = [
     ModelComponent: HulkModel,
     cameraTarget: [0, 0, 0],
     watermark: 'HULK'
+  },
+  {
+    id: 'batman',
+    name: 'THE',
+    name2: 'BATMAN',
+    subtitle: 'The Dark Knight',
+    description: 'Bruce Wayne is a billionaire philanthropist who witnessed the murder of his parents as a child. He trained himself to physical and intellectual perfection to fight crime in Gotham City.',
+    stats: { strength: '45/100', speed: 'Mach 0.1', tech: 'Elite Gear' },
+    theme: 'from-slate-800/50 via-black to-black',
+    strokeColor: '#334155',
+    buttonColor: 'bg-slate-700 hover:bg-slate-800',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(30,41,59,0.6)]',
+    textColor: 'text-slate-400',
+    ModelComponent: BatmanModel,
+    cameraTarget: [0, 0, 0],
+    watermark: 'BATMAN'
   }
 ]
 
