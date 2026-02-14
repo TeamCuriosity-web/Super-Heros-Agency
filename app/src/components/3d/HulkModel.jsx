@@ -16,7 +16,7 @@ export function HulkModel(props) {
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} scale={2.5} position={[0, -1.2, 0]} />
+      <primitive object={scene} scale={2.5} position={[0, 0.5, 0]} />
     </group>
   )
 }
