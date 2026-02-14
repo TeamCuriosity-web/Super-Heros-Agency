@@ -13,7 +13,7 @@ const heroes = [
   {
     id: 'hulk',
     name: 'BRUCE',
-    name2: 'HULK',
+    name2: 'BANNER',
     subtitle: 'The Gamma Giant',
     description: 'Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green behemoth powered by his rage.',
     stats: { strength: '100/100', speed: 'Mach 4', tech: 'Gamma' },
