@@ -11,17 +11,21 @@ export function IronManModel(props) {
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
     
+    // Normalize scale to height of 4 units to match Hulk exactly
+    const targetHeight = 4
+    const scaleFactor = targetHeight / size.y
+    scene.scale.setScalar(scaleFactor)
+
     // Position normalization
-    scene.position.x = -center.x
-    scene.position.y = -center.y
-    scene.position.z = -center.z
+    scene.position.x = -center.x * scaleFactor
+    scene.position.y = -center.y * scaleFactor
+    scene.position.z = -center.z * scaleFactor
 
   }, [scene])
 
   return (
     <group {...props} dispose={null}>
-      {/* Scale determined to fit the viewer for this specific model */}
-      <primitive object={scene} scale={5} position={[0, 0.5, 0]} />
+      <primitive object={scene} position={[0, 0.5, 0]} />
     </group>
   )
 }

@@ -16,7 +16,7 @@ export function ModelViewer({ ModelComponent, cameraTarget = [0, 0, 0] }) {
         <Canvas 
           shadows 
           dpr={[1, 2]} 
-          camera={{ position: [0, 0, 10], fov: 45 }} 
+          camera={{ position: [0, 0, 7], fov: 45 }} 
         >
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={100} castShadow shadow-mapSize={[512, 512]} />
