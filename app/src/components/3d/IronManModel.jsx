@@ -5,14 +5,14 @@ import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function IronManModel(props) {
-  const obj = useLoader(OBJLoader, '/models/Iron_Man.obj')
+  const obj = useLoader(OBJLoader, 'models/Iron_Man.obj')
   
   const textures = useTexture({
-    map: '/models/textures/BaseColor.png',
-    emissiveMap: '/models/textures/Emissive.png',
-    normalMap: '/models/textures/Normal.png',
-    roughnessMap: '/models/textures/Roughness.png',
-    metalnessMap: '/models/textures/Metallic.png',
+    map: 'models/textures/BaseColor.png',
+    emissiveMap: 'models/textures/Emissive.png',
+    normalMap: 'models/textures/Normal.png',
+    roughnessMap: 'models/textures/Roughness.png',
+    metalnessMap: 'models/textures/Metallic.png',
   })
 
   useLayoutEffect(() => {
