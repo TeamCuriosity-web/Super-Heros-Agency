@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
-import { IronManModel } from './IronManModel'
 
 const LoadingScreen = () => (
   <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 flex-col">
