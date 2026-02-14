@@ -150,20 +150,22 @@ export function HeroSection() {
         </h1>
       </div>
 
-      <div className="relative z-10 w-full h-full flex flex-col md:flex-row">
+      <div className="relative z-20 w-full h-full flex flex-col md:flex-row">
 
-        <div className="w-full md:w-1/2 h-[50vh] md:h-full relative order-1 md:order-1">
-          <ModelViewer ModelComponent={hero.ModelComponent} cameraTarget={hero.cameraTarget} />
+        <div className="w-full md:w-1/2 h-[50vh] md:h-full relative order-1 md:order-1 flex items-center justify-center">
+          <div className="w-full h-full">
+            <ModelViewer ModelComponent={hero.ModelComponent} cameraTarget={hero.cameraTarget} />
+          </div>
           
           {/* Navigation Arrows */}
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-8 z-50">
             <button onClick={prevHero} className="text-black/50 hover:text-black transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-12 h-12">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
             </button>
             <button onClick={nextHero} className="text-black/50 hover:text-black transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-12 h-12">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
             </button>
@@ -171,7 +173,7 @@ export function HeroSection() {
         </div>
 
 
-        <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-16 space-y-4 order-2 md:order-2 z-20">
+        <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-16 space-y-4 order-2 md:order-2 z-30">
           <AnimatePresence mode='wait'>
             <motion.div
               key={hero.id}
@@ -180,14 +182,14 @@ export function HeroSection() {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className={`${hero.textColor} font-bold tracking-[0.2em] text-xs md:text-sm mb-2 uppercase transition-colors duration-500`}>
+              <h2 className={`${hero.textColor.replace('-500', '-600').replace('-400', '-600')} font-bold tracking-[0.2em] text-xs md:text-sm mb-2 uppercase transition-colors duration-500`}>
                 {hero.subtitle}
               </h2>
-              <h1 className="text-5xl md:text-7xl font-black mb-4 leading-[0.9]">
+              <h1 className="text-5xl md:text-7xl font-black mb-4 leading-[0.9] text-black">
                 {hero.name} <br />
-                <span className={hero.textColor}>{hero.name2}</span>
+                <span className={hero.textColor.replace('-500', '-600').replace('-400', '-600')}>{hero.name2}</span>
               </h1>
-              <p className="text-slate-600 text-xs md:text-base max-w-lg mb-8 leading-relaxed">
+              <p className="text-slate-700 text-xs md:text-base max-w-lg mb-8 leading-relaxed font-medium">
                 {hero.description}
               </p>
               
@@ -203,17 +205,17 @@ export function HeroSection() {
                 </button>
               </div>
               
-              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-black/5 pt-4">
+              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-black/10 pt-4">
                  <div>
-                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Strength</h4>
+                   <h4 className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Strength</h4>
                    <p className="text-lg font-bold text-black">{hero.stats.strength}</p>
                  </div>
                  <div>
-                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Speed</h4>
+                   <h4 className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Speed</h4>
                    <p className="text-lg font-bold text-black">{hero.stats.speed}</p>
                  </div>
                  <div>
-                   <h4 className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">Tech</h4>
+                   <h4 className="text-slate-500 text-[10px] uppercase tracking-wider mb-1">Tech</h4>
                    <p className="text-lg font-bold text-black">{hero.stats.tech}</p>
                  </div>
               </div>

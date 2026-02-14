@@ -25,9 +25,11 @@ export function SupermanModel(props) {
         const newMat = new THREE.MeshStandardMaterial({
           map: colorMap,
           side: THREE.DoubleSide,
-          color: 0xffffff, // Tint with white to let map show
+          color: 0xffffff,
           roughness: 0.7,
-          metalness: 0.1
+          metalness: 0.1,
+          emissive: new THREE.Color(0xffffff),
+          emissiveIntensity: 0.1
         })
         child.material = newMat
       }

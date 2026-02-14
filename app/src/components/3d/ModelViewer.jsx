@@ -11,7 +11,7 @@ const LoadingScreen = () => (
 
 export function ModelViewer({ ModelComponent, cameraTarget = [0, 0, 0] }) {
   return (
-    <div className="w-full h-full absolute inset-0 z-10 bg-slate-50">
+    <div className="w-full h-full relative bg-transparent">
       <Suspense fallback={<LoadingScreen />}>
         <Canvas 
           shadows 
