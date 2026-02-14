@@ -137,7 +137,7 @@ export function HeroSection() {
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-white text-slate-900 transition-colors duration-700">
+    <div id="heroes" className="relative w-full h-screen overflow-hidden bg-white text-slate-900 transition-colors duration-700">
       {/* Background Gradient Layer */}
       <div 
         className={`absolute inset-0 transition-opacity duration-1000 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} opacity-30`}

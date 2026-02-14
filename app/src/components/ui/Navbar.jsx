@@ -17,7 +17,7 @@ export function Navbar() {
       </div>
 
       <div className="hidden md:flex items-center space-x-12">
-        {['HEROES', 'MISSIONS', 'GALLERY', 'NEWS'].map((item) => (
+        {['HEROES', 'MISSIONS', 'GALLERY'].map((item) => (
           <a key={item} href={`#${item.toLowerCase()}`} className="text-[10px] font-bold text-slate-400 hover:text-black transition-colors tracking-[0.2em] relative group uppercase">
             {item}
             <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-red-600 transition-all duration-300 group-hover:w-full" />
