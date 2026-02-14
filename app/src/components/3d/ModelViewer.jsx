@@ -12,14 +12,18 @@ const LoadingScreen = () => (
 
 export function ModelViewer({ ModelComponent, cameraTarget = [0, 0, 0] }) {
   return (
-    <div className="w-full h-full absolute inset-0 z-10">
+    <div className="w-full h-full absolute inset-0 z-10 bg-black">
       <Suspense fallback={<LoadingScreen />}>
-        <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 0, 7], fov: 45 }} gl={{ antialias: false }}>
+        <Canvas 
+          shadows 
+          dpr={[1, 2]} 
+          camera={{ position: [0, 0, 7], fov: 45 }} 
+        >
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={100} castShadow shadow-mapSize={[512, 512]} />
           <ModelComponent />
           <Environment preset="city" />
-          <ContactShadows position={[0, -0.9, 0]} opacity={0.4} scale={10} blur={2.5} far={4} resolution={128} />
+          <ContactShadows position={[0, -0.9, 0]} opacity={0.4} scale={10} blur={2.8} far={4} resolution={128} />
           <OrbitControls enableZoom={true} enablePan={false} rotateSpeed={0.5} target={cameraTarget} />
         </Canvas>
       </Suspense>

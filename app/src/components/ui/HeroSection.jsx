@@ -18,7 +18,8 @@ const heroes = [
     shadowColor: 'shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]',
     textColor: 'text-red-500',
     ModelComponent: IronManModel,
-    cameraTarget: [0, 0, 2]
+    cameraTarget: [0, 0, 2],
+    watermark: 'STARK'
   },
   {
     id: 'hulk',
@@ -33,7 +34,8 @@ const heroes = [
     shadowColor: 'shadow-[0_10px_30px_-10px_rgba(22,163,74,0.6)]',
     textColor: 'text-green-500',
     ModelComponent: HulkModel,
-    cameraTarget: [0, 0, 0]
+    cameraTarget: [0, 0, 0],
+    watermark: 'HULK'
   }
 ]
 
@@ -50,12 +52,17 @@ export function HeroSection() {
   }
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} text-white transition-colors duration-700`}>
+    <div className="relative w-full h-screen overflow-hidden bg-black text-white">
+      {/* Simplified Background */}
+      <div 
+        className={`absolute inset-0 transition-opacity duration-1000 ${hero.theme} opacity-40`}
+        style={{ background: `radial-gradient(circle at 20% 20%, ${hero.strokeColor}33 0%, black 100%)` }}
+      />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-        <h1 className="text-[25vw] font-black tracking-tighter text-transparent stroke-text uppercase select-none transition-colors duration-700"
+        <h1 className="text-[25vw] font-black tracking-tighter text-transparent stroke-text uppercase select-none transition-all duration-700"
             style={{ WebkitTextStroke: `2px ${hero.strokeColor}` }}>
-          STARK
+          {hero.watermark}
         </h1>
       </div>
 
