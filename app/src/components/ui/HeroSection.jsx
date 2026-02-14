@@ -109,7 +109,7 @@ const heroes = [
   {
     id: 'superman',
     name: 'LEGO',
-    name2: 'KAL-EL',
+    name2: 'SUPER MAN',
     subtitle: 'The Man of Steel-Bricks',
     description: 'Faster than a speeding plastic-bullet. More powerful than a giant LEGO-train. He came from the planet Krypton to lead the Brick-League.',
     stats: { strength: '100/100', speed: 'Sonic', tech: 'Kryptonian' },
