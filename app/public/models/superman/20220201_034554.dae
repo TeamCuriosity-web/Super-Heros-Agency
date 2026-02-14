@@ -211,7 +211,7 @@
 		<instance_effect url="#effect_id_90-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -226,7 +226,7 @@
 		<instance_effect url="#effect_id_28-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -241,7 +241,7 @@
 		<instance_effect url="#effect_id_11-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -256,7 +256,7 @@
 		<instance_effect url="#effect_id_1-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -271,7 +271,7 @@
 		<instance_effect url="#effect_id_7-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -286,7 +286,7 @@
 		<instance_effect url="#effect_id_3-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -301,7 +301,7 @@
 		<instance_effect url="#effect_id_63-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -316,7 +316,7 @@
 		<instance_effect url="#effect_id_5-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>
@@ -331,7 +331,7 @@
 		<instance_effect url="#effect_id_109-fx" />
 		<extra>
 			<technique profile="eyesight">
-				<RoundingEdgeNormal:enable> false </RoundingEdgeNormal:enable>
+				
 			</technique>
 		</extra>
 	</material>

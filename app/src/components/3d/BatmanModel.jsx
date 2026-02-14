@@ -19,7 +19,7 @@ export function BatmanModel(props) {
     obj.traverse((child) => {
       if (child.isMesh) {
         // Boost visibility for dark suits
-        child.material.emissiveIntensity = 0.1
+        child.material.emissiveIntensity = 0.05
         child.material.emissive = new THREE.Color(0xffffff)
         child.material.side = THREE.DoubleSide
         child.material.needsUpdate = true

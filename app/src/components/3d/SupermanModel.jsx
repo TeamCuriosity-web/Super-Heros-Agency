@@ -4,7 +4,8 @@ import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader'
 import * as THREE from 'three'
 
 export function SupermanModel(props) {
-  const { scene } = useLoader(ColladaLoader, 'models/superman/20220201_034554.dae')
+  const result = useLoader(ColladaLoader, 'models/superman/20220201_034554.dae')
+  const scene = result ? result.scene : null
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
@@ -30,6 +31,8 @@ export function SupermanModel(props) {
       offset: [-center.x, -center.y, -center.z]
     })
   }, [scene])
+
+  if (!scene) return null
 
   return (
     <group {...props}>
