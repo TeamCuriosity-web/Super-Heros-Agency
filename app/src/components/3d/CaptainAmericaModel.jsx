@@ -20,6 +20,13 @@ export function CaptainAmericaModel(props) {
         child.material.map = colorMap
         child.material.normalMap = normalMap
         child.material.side = THREE.DoubleSide
+        
+        // Fix for "color not showing": ensure material color is white so map shows fully, 
+        // and add subtle emissive for vibrancy
+        child.material.color = new THREE.Color(0xffffff)
+        child.material.emissive = new THREE.Color(0xffffff)
+        child.material.emissiveIntensity = 0.1
+        
         child.material.needsUpdate = true
       }
     })
