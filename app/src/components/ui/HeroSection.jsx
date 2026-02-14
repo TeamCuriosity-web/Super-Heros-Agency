@@ -3,6 +3,10 @@ import { ModelViewer } from '../3d/ModelViewer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HulkModel } from '../3d/HulkModel'
 import { BatmanModel } from '../3d/BatmanModel'
+import { IronManModel } from '../3d/IronManModel'
+import { SpiderManModel } from '../3d/SpiderManModel'
+import { CaptainAmericaModel } from '../3d/CaptainAmericaModel'
+import { ThorModel } from '../3d/ThorModel'
 
 const heroes = [
   {
@@ -22,19 +26,83 @@ const heroes = [
     watermark: 'HULK'
   },
   {
+    id: 'ironman',
+    name: 'LEGO',
+    name2: 'STARK',
+    subtitle: 'High Tech Bricks',
+    description: 'Billionaire. Philanthropist. Master Builder. Tony Stark engineered the ultimate plastic-alloy armor to protect the Multiverse.',
+    stats: { strength: '85/100', speed: 'Mach 10', tech: 'Nano-Blocks' },
+    theme: 'from-red-600/50 via-black to-black',
+    strokeColor: '#dc2626',
+    buttonColor: 'bg-red-600 hover:bg-red-700',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]',
+    textColor: 'text-red-500',
+    ModelComponent: IronManModel,
+    cameraTarget: [0, 0.5, 0],
+    watermark: 'STARK'
+  },
+  {
+    id: 'spiderman',
+    name: 'LEGO',
+    name2: 'SPIDEY',
+    subtitle: 'Friendly Neighborhood Brick',
+    description: 'Peter Parker was bitten by a radioactive plastic-spider. Now he swings through Gotham City... wait, wrong city. He swings through the brick-jungle!',
+    stats: { strength: '75/100', speed: 'Mach 2', tech: 'Web-Grid' },
+    theme: 'from-blue-600/50 via-black to-black',
+    strokeColor: '#2563eb',
+    buttonColor: 'bg-blue-600 hover:bg-blue-700',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(37,99,235,0.6)]',
+    textColor: 'text-blue-500',
+    ModelComponent: SpiderManModel,
+    cameraTarget: [0, 0.5, 0],
+    watermark: 'SPIDEY'
+  },
+  {
+    id: 'cap',
+    name: 'LEGO',
+    name2: 'CAP',
+    subtitle: 'The First Avenger',
+    description: 'Enhanced by the Super-Soldier-Stud, Steve Rogers leads the team with a shield that defies the laws of plastic-physics.',
+    stats: { strength: '80/100', speed: 'Athlete', tech: 'Vibranium-Stud' },
+    theme: 'from-indigo-600/50 via-black to-black',
+    strokeColor: '#4f46e5',
+    buttonColor: 'bg-indigo-600 hover:bg-indigo-700',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(79,70,229,0.6)]',
+    textColor: 'text-indigo-500',
+    ModelComponent: CaptainAmericaModel,
+    cameraTarget: [0, 0.5, 0],
+    watermark: 'CAP'
+  },
+  {
+    id: 'thor',
+    name: 'LEGO',
+    name2: 'THOR',
+    subtitle: 'God of Thunder-Bricks',
+    description: 'Whosoever holds this hammer, if they be worthy, shall possess the power of the mighty Brick-Odinson.',
+    stats: { strength: '95/100', speed: 'Lightning', tech: 'Mjolnir' },
+    theme: 'from-amber-600/50 via-black to-black',
+    strokeColor: '#d97706',
+    buttonColor: 'bg-amber-600 hover:bg-amber-700',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(217,119,6,0.6)]',
+    textColor: 'text-amber-500',
+    ModelComponent: ThorModel,
+    cameraTarget: [0, 0.5, 0],
+    watermark: 'THOR'
+  },
+  {
     id: 'batman',
-    name: 'THE',
+    name: 'LEGO',
     name2: 'BATMAN',
-    subtitle: 'The Dark Knight',
-    description: 'Bruce Wayne is a billionaire philanthropist who witnessed the murder of his parents as a child. He trained himself to physical and intellectual perfection to fight crime in Gotham City.',
-    stats: { strength: '45/100', speed: 'Mach 0.1', tech: 'Elite Gear' },
-    theme: 'from-slate-800/50 via-black to-black',
-    strokeColor: '#334155',
-    buttonColor: 'bg-slate-700 hover:bg-slate-800',
-    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(30,41,59,0.6)]',
-    textColor: 'text-slate-400',
+    subtitle: 'The Dark Brick',
+    description: 'He is the night. He is vengeance. He is accidentally stepping on a brick in the middle of the night. He is BATMAN.',
+    stats: { strength: '50/100', speed: 'Batmobile', tech: 'Bat-Gadgets' },
+    theme: 'from-gray-700/50 via-black to-black',
+    strokeColor: '#4b5563',
+    buttonColor: 'bg-gray-700 hover:bg-gray-800',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(75,85,99,0.6)]',
+    textColor: 'text-gray-400',
     ModelComponent: BatmanModel,
-    cameraTarget: [0, 0, 0],
+    cameraTarget: [0, 0.5, 0],
     watermark: 'BATMAN'
   }
 ]
@@ -106,7 +174,8 @@ export function HeroSection() {
                 <button className={`px-8 py-3 ${hero.buttonColor} text-white font-bold text-sm rounded-none transition-all duration-300 transform hover:-translate-y-1 ${hero.shadowColor} tracking-wider`}>
                   BOOK NOW
                 </button>
-                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.id === 'hulk' ? 'green' : 'slate'}-500 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}>
+                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.strokeColor} text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}
+                        style={{ '--hover-color': hero.strokeColor } }>
                   CONTACT AGENT
                 </button>
               </div>
