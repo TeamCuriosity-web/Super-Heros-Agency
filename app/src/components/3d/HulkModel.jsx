@@ -10,8 +10,8 @@ export function HulkModel(props) {
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
     
-    // Normalize scale to height of 4 units
-    const targetHeight = 4
+    // Normalize scale to height of 5.5 units for a powerful "Logo" look
+    const targetHeight = 5.5
     const scaleFactor = targetHeight / size.y
     scene.scale.setScalar(scaleFactor)
 
@@ -23,7 +23,7 @@ export function HulkModel(props) {
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} position={[0, 0.5, 0]} />
+      <primitive object={scene} position={[0, 1.2, 0]} />
     </group>
   )
 }
