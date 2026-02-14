@@ -3,5 +3,7 @@
 @layer base {
   body {
     @apply bg-white text-black overflow-hidden;
+    background-color: white !important;
+    color: black !important;
   }
 }
