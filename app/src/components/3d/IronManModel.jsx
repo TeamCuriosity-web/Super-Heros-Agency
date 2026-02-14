@@ -6,17 +6,22 @@ export function IronManModel(props) {
   const { scene } = useGLTF('models/ironman/scene.gltf')
 
   useLayoutEffect(() => {
-    // Center the model geometry
+    // Robust auto-scale and center logic
     const box = new THREE.Box3().setFromObject(scene)
     const center = box.getCenter(new THREE.Vector3())
-    scene.position.x += (scene.position.x - center.x)
-    scene.position.y += (scene.position.y - center.y)
-    scene.position.z += (scene.position.z - center.z)
+    const size = box.getSize(new THREE.Vector3())
+    
+    // Position normalization
+    scene.position.x = -center.x
+    scene.position.y = -center.y
+    scene.position.z = -center.z
+
   }, [scene])
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} scale={2.0} position={[0, 0.5, 0]} />
+      {/* Scale determined to fit the viewer for this specific model */}
+      <primitive object={scene} scale={5} position={[0, 0.5, 0]} />
     </group>
   )
 }

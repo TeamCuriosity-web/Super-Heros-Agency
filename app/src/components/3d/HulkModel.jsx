@@ -9,14 +9,15 @@ export function HulkModel(props) {
     // Center the model geometry
     const box = new THREE.Box3().setFromObject(scene)
     const center = box.getCenter(new THREE.Vector3())
-    scene.position.x += (scene.position.x - center.x)
-    scene.position.y += (scene.position.y - center.y)
-    scene.position.z += (scene.position.z - center.z)
+    
+    scene.position.x = -center.x
+    scene.position.y = -center.y
+    scene.position.z = -center.z
   }, [scene])
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} scale={2.0} position={[0, 0.5, 0]} />
+      <primitive object={scene} scale={2.5} position={[0, 0.5, 0]} />
     </group>
   )
 }
