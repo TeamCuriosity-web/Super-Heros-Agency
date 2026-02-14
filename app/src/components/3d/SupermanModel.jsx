@@ -15,12 +15,14 @@ export function SupermanModel(props) {
       if (child.isMesh) {
         child.material.side = THREE.DoubleSide
         child.material.needsUpdate = true
+        // Ensure accurate matrices for structure
+        child.updateMatrixWorld(true)
       }
     })
 
     const box = new THREE.Box3().setFromObject(scene)
-    const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
+    const center = box.getCenter(new THREE.Vector3())
     
     // Normalize scale to height of 5.5 units
     const targetHeight = 5.5
@@ -28,7 +30,7 @@ export function SupermanModel(props) {
     
     setTransform({
       scale: scaleFactor,
-      offset: [-center.x, -center.y, -center.z]
+      offset: [-center.x, -box.min.y, -center.z]
     })
   }, [scene])
 
@@ -36,7 +38,7 @@ export function SupermanModel(props) {
 
   return (
     <group {...props}>
-      <group position={[0, 1.2, 0]} scale={transform.scale}>
+      <group position={[0, -1.5, 0]} scale={transform.scale}>
         <primitive object={scene} position={transform.offset} />
       </group>
     </group>

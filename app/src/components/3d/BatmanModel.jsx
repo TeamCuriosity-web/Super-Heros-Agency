@@ -27,21 +27,21 @@ export function BatmanModel(props) {
     })
 
     const box = new THREE.Box3().setFromObject(obj)
-    const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
+    const center = box.getCenter(new THREE.Vector3())
     
     const targetHeight = 5.5
     const scaleFactor = targetHeight / (size.y || 1)
     
     setTransform({
       scale: scaleFactor,
-      offset: [-center.x, -center.y, -center.z]
+      offset: [-center.x, -box.min.y, -center.z]
     })
   }, [obj])
 
   return (
     <group {...props}>
-      <group position={[0, 1.2, 0]} scale={transform.scale}>
+      <group position={[0, -1.5, 0]} scale={transform.scale}>
         <primitive object={obj} position={transform.offset} />
       </group>
     </group>
