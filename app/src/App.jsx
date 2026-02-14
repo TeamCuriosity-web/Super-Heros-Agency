@@ -1,8 +1,12 @@
 import { HeroSection } from './components/ui/HeroSection'
+import { Navbar } from './components/ui/Navbar'
 
 function App() {
   return (
-    <HeroSection />
+    <>
+      <Navbar />
+      <HeroSection />
+    </>
   )
 }
 
