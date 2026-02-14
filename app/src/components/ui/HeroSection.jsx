@@ -7,6 +7,7 @@ import { IronManModel } from '../3d/IronManModel'
 import { SpiderManModel } from '../3d/SpiderManModel'
 import { CaptainAmericaModel } from '../3d/CaptainAmericaModel'
 import { ThorModel } from '../3d/ThorModel'
+import { SupermanModel } from '../3d/SupermanModel'
 
 const heroes = [
   {
@@ -104,6 +105,22 @@ const heroes = [
     ModelComponent: BatmanModel,
     cameraTarget: [0, 0.5, 0],
     watermark: 'BATMAN'
+  },
+  {
+    id: 'superman',
+    name: 'LEGO',
+    name2: 'KAL-EL',
+    subtitle: 'The Man of Steel-Bricks',
+    description: 'Faster than a speeding plastic-bullet. More powerful than a giant LEGO-train. He came from the planet Krypton to lead the Brick-League.',
+    stats: { strength: '100/100', speed: 'Sonic', tech: 'Kryptonian' },
+    theme: 'from-blue-700/50 via-black to-black',
+    strokeColor: '#1d4ed8',
+    buttonColor: 'bg-blue-700 hover:bg-blue-800',
+    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(29,78,216,0.6)]',
+    textColor: 'text-blue-400',
+    ModelComponent: SupermanModel,
+    cameraTarget: [0, 0.5, 0],
+    watermark: 'SUPERMAN'
   }
 ]
 
