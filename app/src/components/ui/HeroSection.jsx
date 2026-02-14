@@ -88,50 +88,47 @@ export function HeroSection() {
 
 
         <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-16 space-y-4 order-2 md:order-2 z-20">
-          <AnimatePresence mode='wait'>
-            <motion.div
-              key={hero.id}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className={`${hero.textColor} font-bold tracking-[0.2em] text-xs md:text-sm mb-2 uppercase transition-colors duration-500`}>
-                {hero.subtitle}
-              </h2>
-              <h1 className="text-5xl md:text-7xl font-black mb-4 leading-[0.9]">
-                {hero.name} <br />
-                <span className={hero.textColor}>{hero.name2}</span>
-              </h1>
-              <p className="text-gray-400 text-xs md:text-base max-w-lg mb-8 leading-relaxed">
-                {hero.description}
-              </p>
-              
-              <div className="flex space-x-4 items-center">
-                <button className={`px-8 py-3 ${hero.buttonColor} text-white font-bold text-sm rounded-none transition-all duration-300 transform hover:-translate-y-1 ${hero.shadowColor} tracking-wider`}>
-                  BOOK NOW
-                </button>
-                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.id === 'ironman' ? 'red' : 'green'}-500 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}>
-                  CONTACT AGENT
-                </button>
-              </div>
-              
-              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-white/10 pt-4">
-                 <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Strength</h4>
-                   <p className="text-lg font-bold">{hero.stats.strength}</p>
-                 </div>
-                 <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Speed</h4>
-                   <p className="text-lg font-bold">{hero.stats.speed}</p>
-                 </div>
-                 <div>
-                   <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1">Tech</h4>
-                   <p className="text-lg font-bold">{hero.stats.tech}</p>
-                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <motion.div
+            key={hero.id}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h2 className={`${hero.textColor} font-bold tracking-[0.2em] text-xs md:text-sm mb-2 uppercase transition-colors duration-500`}>
+              {hero.subtitle}
+            </h2>
+            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-[0.9] text-white">
+              {hero.name} <br />
+              <span className={hero.textColor}>{hero.name2}</span>
+            </h1>
+            <p className="text-gray-400 text-xs md:text-base max-w-lg mb-8 leading-relaxed">
+              {hero.description}
+            </p>
+            
+            <div className="flex space-x-4 items-center">
+              <button className={`px-8 py-3 ${hero.buttonColor} text-white font-bold text-sm rounded-none transition-all duration-300 transform hover:-translate-y-1 ${hero.shadowColor} tracking-wider`}>
+                BOOK NOW
+              </button>
+              <button className={`px-8 py-3 border border-white/20 hover:border-${hero.id === 'ironman' ? 'red' : 'green'}-500 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}>
+                CONTACT AGENT
+              </button>
+            </div>
+            
+            <div className="mt-8 grid grid-cols-3 gap-6 border-t border-white/10 pt-4">
+               <div>
+                 <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1 text-white/50">Strength</h4>
+                 <p className="text-lg font-bold text-white">{hero.stats.strength}</p>
+               </div>
+               <div>
+                 <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1 text-white/50">Speed</h4>
+                 <p className="text-lg font-bold text-white">{hero.stats.speed}</p>
+               </div>
+               <div>
+                 <h4 className="text-gray-500 text-[10px] uppercase tracking-wider mb-1 text-white/50">Tech</h4>
+                 <p className="text-lg font-bold text-white">{hero.stats.tech}</p>
+               </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>
