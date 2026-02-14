@@ -47,8 +47,8 @@ export function Gallery() {
         ref={imageRef}
         className="absolute inset-0 z-0 bg-cover bg-center scale-110"
         style={{ 
-          backgroundImage: 'url("https://images.unsplash.com/photo-1624213111452-35e8d3d5cc18?q=80&w=2667&auto=format&fit=crop")',
-          filter: 'brightness(0.4) saturate(0)'
+          backgroundImage: 'url("https://images.unsplash.com/photo-1624213111452-35e8d3d5cc18?q=70&w=1600&auto=format&fit=crop")',
+          filter: 'brightness(0.3) saturate(0)'
         }} 
       />
       
