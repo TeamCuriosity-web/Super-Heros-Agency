@@ -8,7 +8,7 @@ export function CaptainAmericaModel(props) {
   const fbx = useLoader(FBXLoader, 'models/captain/cap.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
-  // High-fidelity LEGO textures
+  // High-fidelity textures
   const colorMap = useTexture('models/captain/mat0_c.jpg.png', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
@@ -22,28 +22,38 @@ export function CaptainAmericaModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        child.material.map = colorMap
-        child.material.normalMap = normalMap
-        child.material.side = THREE.DoubleSide
-        
-        // Restore real colors: use clean white and subtle lighting
-        child.material.color = new THREE.Color(0xffffff)
-        child.material.emissive = new THREE.Color(0xffffff)
-        child.material.emissiveIntensity = 0.05
-        
-        child.material.needsUpdate = true
+        // Force fresh materials to ensure "real colors" show up correctly
+        const newMat = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          normalMap: normalMap,
+          side: THREE.DoubleSide,
+          color: 0xffffff,
+          roughness: 0.6,
+          metalness: 0.3
+        })
+        child.material = newMat
       }
     })
 
-    const box = new THREE.Box3().setFromObject(fbx)
+    // Compute bounding box from MESHES ONLY
+    const box = new THREE.Box3()
+    fbx.traverse((child) => {
+      if (child.isMesh) {
+        child.geometry.computeBoundingBox()
+        const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
+        box.union(childBox)
+      }
+    })
+
+    if (box.isEmpty()) box.setFromObject(fbx)
+
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
-    // Normalize scale to height of 5.5 units
-    const targetHeight = 5.5
+    // Standardize to 4.5 units height
+    const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     
-    // Perfect alignment: Center horizontally, align bottom to local y=0
     setTransform({
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
@@ -52,7 +62,7 @@ export function CaptainAmericaModel(props) {
 
   return (
     <group {...props}>
-      <group position={[0, -1.5, 0]} scale={transform.scale}>
+      <group position={[0, -2, 0]} scale={transform.scale}>
         <primitive object={fbx} position={transform.offset} />
       </group>
     </group>

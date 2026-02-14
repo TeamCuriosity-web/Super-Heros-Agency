@@ -9,17 +9,29 @@ export function IronManModel(props) {
   useLayoutEffect(() => {
     if (!scene) return
     
-    // Reset any previous modifications to the cached scene
     scene.position.set(0, 0, 0)
     scene.scale.set(1, 1, 1)
     scene.rotation.set(0, 0, 0)
     scene.updateMatrixWorld()
 
-    const box = new THREE.Box3().setFromObject(scene)
+    // Bounding box from MESHES ONLY
+    const box = new THREE.Box3()
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        if (child.geometry) {
+          child.geometry.computeBoundingBox()
+          const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
+          box.union(childBox)
+        }
+      }
+    })
+
+    if (box.isEmpty()) box.setFromObject(scene)
+
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
-    const targetHeight = 5.5
+    const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     
     setTransform({
@@ -30,7 +42,7 @@ export function IronManModel(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group position={[0, -1.5, 0]} scale={transform.scale}>
+      <group position={[0, -2, 0]} scale={transform.scale}>
         <Clone object={scene} position={transform.offset} />
       </group>
     </group>
@@ -38,4 +50,3 @@ export function IronManModel(props) {
 }
 
 useGLTF.preload('models/ironman/scene.gltf')
-

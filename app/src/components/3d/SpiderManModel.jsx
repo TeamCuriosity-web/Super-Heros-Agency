@@ -19,25 +19,39 @@ export function SpiderManModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        child.material.map = colorMap
-        child.material.side = THREE.DoubleSide
-        child.material.transparent = false
-        child.material.alphaTest = 0.5
-        // Ensure no color overrides wash out the map
-        child.material.color = new THREE.Color(0xffffff)
-        child.material.needsUpdate = true
+        // Create a fresh material to avoid "pink" shader errors from original FBX materials
+        const newMat = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          side: THREE.DoubleSide,
+          transparent: false,
+          alphaTest: 0.5,
+          color: 0xffffff,
+          roughness: 0.7,
+          metalness: 0.2
+        })
+        child.material = newMat
       }
     })
 
-    const box = new THREE.Box3().setFromObject(fbx)
+    // Compute bounding box from MESHES ONLY to avoid rigs/helpers distorting sizing
+    const box = new THREE.Box3()
+    fbx.traverse((child) => {
+      if (child.isMesh) {
+        child.geometry.computeBoundingBox()
+        const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
+        box.union(childBox)
+      }
+    })
+
+    if (box.isEmpty()) box.setFromObject(fbx) // Fallback
+
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
     
-    // Normalize scale to height of 5.5 units
-    const targetHeight = 5.5
+    // Normalize scale to height of 4.5 units (scaled down from 5.5 for better fit)
+    const targetHeight = 4.5
     const scaleFactor = targetHeight / (size.y || 1)
     
-    // Perfect alignment: Center horizontally, but align bottom to y=0 in local group
     setTransform({
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
@@ -46,7 +60,7 @@ export function SpiderManModel(props) {
 
   return (
     <group {...props}>
-      <group position={[0, -1.5, 0]} scale={transform.scale}>
+      <group position={[0, -2, 0]} scale={transform.scale}>
         <primitive object={fbx} position={transform.offset} />
       </group>
     </group>
