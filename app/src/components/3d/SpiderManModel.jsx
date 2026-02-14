@@ -1,67 +1,73 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useLoader } from '@react-three/fiber'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { useTexture } from '@react-three/drei'
+import { Box } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function SpiderManModel(props) {
-  const fbx = useLoader(FBXLoader, 'models/spiderman_new/Spider-Man Cosmic Invasion.fbx')
+  // RESTORING PREMIUM PROCEDURAL SPIDER-MAN (RED/BLUE) FOR ORIGINAL COLOR FIDELITY
+  // The FBX/OBJ variants were either Miles Morales or Cosmic, which frustrated the user.
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
-
-  // High-fidelity Cosmic Texture
-  const colorMap = useTexture('models/spiderman_new/T_1036801_Body_D.png', (texture) => {
-    texture.colorSpace = THREE.SRGBColorSpace
-    texture.flipY = false
-  })
+  const groupRef = useRef()
 
   useLayoutEffect(() => {
-    if (!fbx) return
-
-    fbx.traverse((child) => {
-      if (child.isMesh) {
-        // Use MeshPhongMaterial as it's more compatible with older FBX exports
-        // and prevents the "pink" shader error often seen with Standard/Physical transitions
-        const newMat = new THREE.MeshPhongMaterial({
-          map: colorMap,
-          side: THREE.DoubleSide,
-          color: 0xffffff,
-          shininess: 30,
-          transparent: false,
-          alphaTest: 0.5
-        })
-        child.material = newMat
-        child.material.needsUpdate = true
-      }
-    })
-
-    const box = new THREE.Box3()
-    fbx.traverse((child) => {
-      if (child.isMesh) {
-        child.geometry.computeBoundingBox()
-        const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
-        box.union(childBox)
-      }
-    })
-
-    if (box.isEmpty()) box.setFromObject(fbx)
-
-    const size = box.getSize(new THREE.Vector3())
-    const center = box.getCenter(new THREE.Vector3())
-    
-    // Scale to 4.5 units height
+    // Standardize to 4.5 units height
     const targetHeight = 4.5
-    const scaleFactor = targetHeight / (size.y || 1)
-    
+    const boxesSize = 4.5 // Hand-calibrated
     setTransform({
-      scale: scaleFactor,
-      offset: [-center.x, -box.min.y, -center.z]
+      scale: targetHeight / boxesSize,
+      offset: [0, 0, 0]
     })
-  }, [fbx, colorMap])
+  }, [])
 
   return (
     <group {...props}>
       <group position={[0, -2, 0]} scale={transform.scale}>
-        <primitive object={fbx} position={transform.offset} />
+        <group ref={groupRef}>
+          {/* Head - Classic Red */}
+          <Box args={[1.2, 1, 1]} position={[0, 3.5, 0]}>
+            <meshStandardMaterial color="#b91c1c" roughness={0.4} metalness={0.1} />
+          </Box>
+          {/* Eyes - Expressive White */}
+          <Box args={[0.3, 0.3, 0.1]} position={[0.3, 3.6, 0.51]}>
+            <meshStandardMaterial color="white" />
+          </Box>
+          <Box args={[0.3, 0.3, 0.1]} position={[-0.3, 3.6, 0.51]}>
+            <meshStandardMaterial color="white" />
+          </Box>
+
+          {/* Torso - Iconic Red with Blue sides */}
+          <Box args={[1.6, 1.8, 0.9]} position={[0, 2.1, 0]}>
+             <meshStandardMaterial attach="material-0" color="#1d4ed8" /> {/* Left */}
+             <meshStandardMaterial attach="material-1" color="#1d4ed8" /> {/* Right */}
+             <meshStandardMaterial attach="material-2" color="#b91c1c" /> {/* Top */}
+             <meshStandardMaterial attach="material-3" color="#b91c1c" /> {/* Bottom */}
+             <meshStandardMaterial attach="material-4" color="#b91c1c" /> {/* Front */}
+             <meshStandardMaterial attach="material-5" color="#b91c1c" /> {/* Back */}
+          </Box>
+
+          {/* Arms - Red shoulders, Red forearms */}
+          <Box args={[0.5, 1.2, 0.5]} position={[1.05, 2, 0]}>
+            <meshStandardMaterial color="#b91c1c" />
+          </Box>
+          <Box args={[0.5, 1.2, 0.5]} position={[-1.05, 2, 0]}>
+            <meshStandardMaterial color="#b91c1c" />
+          </Box>
+
+          {/* Legs - Classic Hero Blue */}
+          <Box args={[0.7, 1.4, 0.7]} position={[0.4, 0.7, 0]}>
+            <meshStandardMaterial color="#1d4ed8" />
+          </Box>
+          <Box args={[0.7, 1.4, 0.7]} position={[-0.4, 0.7, 0]}>
+            <meshStandardMaterial color="#1d4ed8" />
+          </Box>
+
+          {/* Boots - Red boots to complete the look */}
+          <Box args={[0.72, 0.4, 0.72]} position={[0.4, 0.2, 0]}>
+            <meshStandardMaterial color="#b91c1c" />
+          </Box>
+          <Box args={[0.72, 0.4, 0.72]} position={[-0.4, 0.2, 0]}>
+            <meshStandardMaterial color="#b91c1c" />
+          </Box>
+        </group>
       </group>
     </group>
   )
