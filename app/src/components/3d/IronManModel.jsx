@@ -1,25 +1,25 @@
-import React from 'react'
-import { Box, Cylinder } from '@react-three/drei'
+import React, { useLayoutEffect } from 'react'
+import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 
 export function IronManModel(props) {
+  const { scene } = useGLTF('models/ironman/scene.gltf')
+
+  useLayoutEffect(() => {
+    // Center the model geometry
+    const box = new THREE.Box3().setFromObject(scene)
+    const center = box.getCenter(new THREE.Vector3())
+    scene.position.x += (scene.position.x - center.x)
+    scene.position.y += (scene.position.y - center.y)
+    scene.position.z += (scene.position.z - center.z)
+  }, [scene])
+
   return (
-    <group {...props}>
-      {/* Body */}
-      <Box args={[1.5, 2, 1]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="#991b1b" metalness={0.8} roughness={0.2} />
-      </Box>
-      {/* Head */}
-      <Box args={[1.2, 1, 1]} position={[0, 1.5, 0]}>
-        <meshStandardMaterial color="#991b1b" metalness={0.8} roughness={0.2} />
-      </Box>
-      {/* Face Plate */}
-      <Box args={[0.9, 0.8, 0.1]} position={[0, 1.5, 0.5]}>
-        <meshStandardMaterial color="#fde047" metalness={0.9} roughness={0.1} />
-      </Box>
-      {/* Arc Reactor */}
-      <Cylinder args={[0.2, 0.2, 0.1, 32]} rotation={[Math.PI / 2, 0, 0]} position={[0, 0.3, 0.5]}>
-        <meshStandardMaterial color="#60a5fa" emissive="#60a5fa" emissiveIntensity={5} />
-      </Cylinder>
+    <group {...props} dispose={null}>
+      <primitive object={scene} scale={2.5} position={[0, 0.5, 0]} />
     </group>
   )
 }
+
+useGLTF.preload('models/ironman/scene.gltf')
+
