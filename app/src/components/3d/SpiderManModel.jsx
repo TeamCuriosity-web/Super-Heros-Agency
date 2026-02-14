@@ -1,25 +1,26 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useLoader } from '@react-three/fiber'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function SpiderManModel(props) {
   // Restore the original high-fidelity Miles Morales model
   // The user specifically asked for original colours and was frustrated by the procedural version.
-  const materials = useLoader(MTLLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.mtl')
-  const obj = useLoader(OBJLoader, 'models/spiderman/M-FF_iOS_HERO_Miles_Morales_Spider-Man_Ultimate.obj', (loader) => {
-    materials.preload()
-    loader.setMaterials(materials)
+  const fbx = useLoader(FBXLoader, 'models/spiderman_new/Spider-Man Cosmic Invasion.fbx')
+  const colorMap = useTexture('models/spiderman_new/T_1036801_Body_D.png', (t) => {
+    t.colorSpace = THREE.SRGBColorSpace
+    t.flipY = false
   })
 
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
-    if (!obj) return
+    if (!fbx) return
 
-    obj.traverse((child) => {
+    fbx.traverse((child) => {
       if (child.isMesh) {
+        child.material.map = colorMap
         child.material.side = THREE.DoubleSide
         child.material.transparent = false
         child.material.alphaTest = 0.5
@@ -29,7 +30,7 @@ export function SpiderManModel(props) {
 
     // Compute bounding box from MESHES ONLY to avoid rigs/helpers distorting sizing
     const box = new THREE.Box3()
-    obj.traverse((child) => {
+    fbx.traverse((child) => {
       if (child.isMesh) {
         child.geometry.computeBoundingBox()
         const childBox = new THREE.Box3().copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
@@ -37,7 +38,7 @@ export function SpiderManModel(props) {
       }
     })
 
-    if (box.isEmpty()) box.setFromObject(obj)
+    if (box.isEmpty()) box.setFromObject(fbx)
 
     const size = box.getSize(new THREE.Vector3())
     const center = box.getCenter(new THREE.Vector3())
@@ -50,12 +51,12 @@ export function SpiderManModel(props) {
       scale: scaleFactor,
       offset: [-center.x, -box.min.y, -center.z]
     })
-  }, [obj])
+  }, [fbx, colorMap])
 
   return (
     <group {...props}>
       <group position={[0, -2, 0]} scale={transform.scale}>
-        <primitive object={obj} position={transform.offset} />
+        <primitive object={fbx} position={transform.offset} />
       </group>
     </group>
   )

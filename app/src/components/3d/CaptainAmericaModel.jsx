@@ -9,11 +9,11 @@ export function CaptainAmericaModel(props) {
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   // High-fidelity LEGO textures - Restored to .jpg to satisfy internal FBX loader paths
-  const colorMap = useTexture('models/captain/mat0_c.jpg', (t) => {
+  const colorMap = useTexture('Resources/lego-cap-new-unzipped/textures/mat0_c.jpg.png', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
   })
-  const normalMap = useTexture('models/captain/mat0_n.jpg', (t) => {
+  const normalMap = useTexture('Resources/lego-cap-new-unzipped/textures/mat0_n.jpg.png', (t) => {
     t.flipY = false
   })
 

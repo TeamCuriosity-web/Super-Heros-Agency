@@ -23,7 +23,7 @@ const heroes = [
     shadowColor: 'shadow-[0_10px_30px_-10px_rgba(22,163,74,0.4)]',
     textColor: 'text-green-600',
     ModelComponent: HulkModel,
-    cameraTarget: [0, 0, 0],
+    cameraTarget: [0, 1.2, 0],
     watermark: 'HULK'
   },
   {
@@ -143,9 +143,9 @@ export function HeroSection() {
         className={`absolute inset-0 transition-opacity duration-1000 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] ${hero.theme} opacity-30`}
       />
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
         <h1 className="text-[25vw] font-black tracking-tighter text-transparent stroke-text uppercase select-none transition-colors duration-700"
-            style={{ WebkitTextStroke: `2px ${hero.strokeColor}` }}>
+            style={{ WebkitTextStroke: `4px ${hero.strokeColor}` }}>
           {hero.watermark}
         </h1>
       </div>
