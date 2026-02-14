@@ -1,33 +1,16 @@
 import React, { useState } from 'react'
 import { ModelViewer } from '../3d/ModelViewer'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IronManModel } from '../3d/IronManModel'
 import { HulkModel } from '../3d/HulkModel'
 import { BatmanModel } from '../3d/BatmanModel'
 
 const heroes = [
   {
-    id: 'ironman',
-    name: 'IRON',
-    name2: 'MAN',
-    subtitle: 'The Golden Avenger',
-    description: 'Anthony Edward "Tony" Stark is a billionaire industrialist, a founding member of the Avengers, and the former CEO of Stark Industries. A brash but brilliant inventor, he designed the Iron Man suit.',
-    stats: { strength: '85/100', speed: 'Mach 10', tech: 'Nanotech' },
-    theme: 'from-rose-600/50 via-black to-black',
-    strokeColor: '#dc2626',
-    buttonColor: 'bg-red-600 hover:bg-red-700',
-    shadowColor: 'shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)]',
-    textColor: 'text-red-500',
-    ModelComponent: IronManModel,
-    cameraTarget: [0, 0, 2],
-    watermark: 'STARK'
-  },
-  {
     id: 'hulk',
-    name: 'THE',
+    name: 'LEGO',
     name2: 'HULK',
-    subtitle: 'The Strongest Avenger',
-    description: 'Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage.',
+    subtitle: 'The Smallest Giant',
+    description: 'Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green brick-monster powered by his rage.',
     stats: { strength: '100/100', speed: 'Mach 4', tech: 'Gamma' },
     theme: 'from-green-600/50 via-black to-black',
     strokeColor: '#16a34a',
@@ -123,7 +106,7 @@ export function HeroSection() {
                 <button className={`px-8 py-3 ${hero.buttonColor} text-white font-bold text-sm rounded-none transition-all duration-300 transform hover:-translate-y-1 ${hero.shadowColor} tracking-wider`}>
                   BOOK NOW
                 </button>
-                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.id === 'ironman' ? 'red' : 'green'}-500 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}>
+                <button className={`px-8 py-3 border border-white/20 hover:border-${hero.id === 'hulk' ? 'green' : 'slate'}-500 text-white font-bold text-sm rounded-none transition-all duration-300 hover:bg-white/10 tracking-wider`}>
                   CONTACT AGENT
                 </button>
               </div>

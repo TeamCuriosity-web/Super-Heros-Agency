@@ -1,11 +1,14 @@
-import { Box } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 
 export function HulkModel(props) {
+  const { scene } = useGLTF('models/hulk/lego_hulk.glb')
+
   return (
-    <group {...props}>
-      <Box args={[2, 3, 2]} position={[0, 0, 0]} castShadow>
-        <meshStandardMaterial color="#22c55e" roughness={0.5} />
-      </Box>
+    <group {...props} dispose={null}>
+      <primitive object={scene} scale={3} position={[0, -1.5, 0]} />
     </group>
   )
 }
+
+useGLTF.preload('models/hulk/lego_hulk.glb')
+
