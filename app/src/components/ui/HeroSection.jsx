@@ -152,10 +152,8 @@ export function HeroSection() {
 
       <div className="relative z-20 w-full h-full flex flex-col md:flex-row">
 
-        <div className="w-full md:w-1/2 h-[50vh] md:h-full relative order-1 md:order-1 flex items-center justify-center">
-          <div className="w-full h-full">
-            <ModelViewer ModelComponent={hero.ModelComponent} cameraTarget={hero.cameraTarget} />
-          </div>
+        <div className="w-full md:w-[55%] h-[50vh] md:h-full relative order-1 md:order-1">
+          <ModelViewer ModelComponent={hero.ModelComponent} cameraTarget={hero.cameraTarget} />
           
           {/* Navigation Arrows */}
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-8 z-50">
@@ -173,7 +171,7 @@ export function HeroSection() {
         </div>
 
 
-        <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-16 space-y-4 order-2 md:order-2 z-30">
+        <div className="w-full md:w-[45%] h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-16 space-y-4 order-2 md:order-2 z-30">
           <AnimatePresence mode='wait'>
             <motion.div
               key={hero.id}
