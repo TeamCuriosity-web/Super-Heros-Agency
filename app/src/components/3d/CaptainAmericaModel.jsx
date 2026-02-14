@@ -9,7 +9,7 @@ export function CaptainAmericaModel(props) {
   // High-fidelity LEGO textures
   const headTexture = useTexture('models/captain/0x0bb2cd85.png')
   const torsoTexture = useTexture('models/captain/0x20cbdca0.png')
-  const shieldTexture = useTexture('models/captain/59be2e63.png')
+  const shieldTexture = useTexture('models/captain/0x59be2e63.png')
 
   useLayoutEffect(() => {
     if (!groupRef.current) return
