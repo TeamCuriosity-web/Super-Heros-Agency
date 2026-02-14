@@ -20,18 +20,10 @@ export function SupermanModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        // We override materials to ensure the "Original Colors" request is met
-        // while using the higher quality mesh.
-        const newMat = new THREE.MeshStandardMaterial({
-          map: colorMap,
-          side: THREE.DoubleSide,
-          color: 0xffffff,
-          roughness: 0.7,
-          metalness: 0.1,
-          emissive: new THREE.Color(0xffffff),
-          emissiveIntensity: 0.1
-        })
-        child.material = newMat
+        if (child.material) {
+          child.material.map = colorMap
+          child.material.needsUpdate = true
+        }
       }
     })
 

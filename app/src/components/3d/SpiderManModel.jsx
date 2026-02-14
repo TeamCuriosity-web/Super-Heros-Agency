@@ -21,9 +21,6 @@ export function SpiderManModel(props) {
     fbx.traverse((child) => {
       if (child.isMesh) {
         child.material.map = colorMap
-        child.material.side = THREE.DoubleSide
-        child.material.transparent = false
-        child.material.alphaTest = 0.5
         child.material.needsUpdate = true
       }
     })

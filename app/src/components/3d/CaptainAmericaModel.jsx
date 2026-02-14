@@ -22,16 +22,11 @@ export function CaptainAmericaModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        // Use MeshPhongMaterial for better FBX metadata compatibility
-        const newMat = new THREE.MeshPhongMaterial({
-          map: colorMap,
-          normalMap: normalMap,
-          side: THREE.DoubleSide,
-          color: 0xffffff,
-          shininess: 50
-        })
-        child.material = newMat
-        child.material.needsUpdate = true
+        if (child.material) {
+          child.material.map = colorMap
+          child.material.normalMap = normalMap
+          child.material.needsUpdate = true
+        }
       }
     })
 

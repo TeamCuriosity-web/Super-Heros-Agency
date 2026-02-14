@@ -23,7 +23,7 @@ const heroes = [
     shadowColor: 'shadow-[0_10px_30px_-10px_rgba(22,163,74,0.4)]',
     textColor: 'text-green-600',
     ModelComponent: HulkModel,
-    cameraTarget: [0, 0.5, 0],
+    cameraTarget: [0, 0, 0],
     watermark: 'HULK'
   },
   {
