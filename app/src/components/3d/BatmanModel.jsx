@@ -5,8 +5,8 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function BatmanModel(props) {
-  const materials = useLoader(MTLLoader, 'models/batman/lego-batman.mtl')
-  const obj = useLoader(OBJLoader, 'models/batman/lego-batman.obj', (loader) => {
+  const materials = useLoader(MTLLoader, 'models/batman/batman.mtl')
+  const obj = useLoader(OBJLoader, 'models/batman/batman.obj', (loader) => {
     materials.preload()
     loader.setMaterials(materials)
   })

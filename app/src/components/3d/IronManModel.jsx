@@ -3,7 +3,7 @@ import { useGLTF, Clone } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function IronManModel(props) {
-  const { scene } = useGLTF('models/ironman/scene.gltf')
+  const { scene } = useGLTF('models/iron-man/scene.gltf')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   useLayoutEffect(() => {
@@ -49,4 +49,4 @@ export function IronManModel(props) {
   )
 }
 
-useGLTF.preload('models/ironman/scene.gltf')
+useGLTF.preload('models/iron-man/scene.gltf')

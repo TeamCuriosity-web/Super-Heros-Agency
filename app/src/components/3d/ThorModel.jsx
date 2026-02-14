@@ -5,8 +5,8 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 import * as THREE from 'three'
 
 export function ThorModel(props) {
-  const materials = useLoader(MTLLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.mtl')
-  const obj = useLoader(OBJLoader, 'models/thor/M-FF_iOS_HERO_Thor_Odinson_Avengers.obj', (loader) => {
+  const materials = useLoader(MTLLoader, 'models/thor/thor.mtl')
+  const obj = useLoader(OBJLoader, 'models/thor/thor.obj', (loader) => {
     materials.preload()
     loader.setMaterials(materials)
   })

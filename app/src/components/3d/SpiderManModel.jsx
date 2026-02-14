@@ -7,8 +7,8 @@ import * as THREE from 'three'
 export function SpiderManModel(props) {
   // Restore the original high-fidelity Miles Morales model
   // The user specifically asked for original colours and was frustrated by the procedural version.
-  const fbx = useLoader(FBXLoader, 'models/spiderman_new/Spider-Man Cosmic Invasion.fbx')
-  const colorMap = useTexture('models/spiderman_new/T_1036801_Body_D.png', (t) => {
+  const fbx = useLoader(FBXLoader, 'models/spider-man/spiderman.fbx')
+  const colorMap = useTexture('models/spider-man/T_1036801_Body_D.png', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
   })

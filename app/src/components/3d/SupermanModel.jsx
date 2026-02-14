@@ -6,11 +6,11 @@ import * as THREE from 'three'
 
 export function SupermanModel(props) {
   // Loading high-fidelity model but FORCING original LEGO colors
-  const fbx = useLoader(FBXLoader, 'models/superman_new/superman.fbx')
+  const fbx = useLoader(FBXLoader, 'models/superman/superman.fbx')
   const [transform, setTransform] = useState({ scale: 1, offset: [0, 0, 0] })
 
   // High-fidelity LEGO texture
-  const colorMap = useTexture('models/superman_new/body_d.png', (t) => {
+  const colorMap = useTexture('models/superman/body_d.png', (t) => {
     t.colorSpace = THREE.SRGBColorSpace
     t.flipY = false
   })
