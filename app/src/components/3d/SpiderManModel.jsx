@@ -20,7 +20,13 @@ export function SpiderManModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        child.material.map = colorMap
+        // Force high-quality materials to fix missing texture (pink poop) issue
+        child.material = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          metalness: 0.1,
+          roughness: 0.8,
+          side: THREE.FrontSide
+        })
         child.material.needsUpdate = true
       }
     })

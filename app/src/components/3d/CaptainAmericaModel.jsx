@@ -22,11 +22,15 @@ export function CaptainAmericaModel(props) {
 
     fbx.traverse((child) => {
       if (child.isMesh) {
-        if (child.material) {
-          child.material.map = colorMap
-          child.material.normalMap = normalMap
-          child.material.needsUpdate = true
-        }
+        // Force high-quality materials to fix missing texture (pink poop) issue
+        child.material = new THREE.MeshStandardMaterial({
+          map: colorMap,
+          normalMap: normalMap,
+          metalness: 0.2,
+          roughness: 0.7,
+          side: THREE.DoubleSide
+        })
+        child.material.needsUpdate = true
       }
     })
 
