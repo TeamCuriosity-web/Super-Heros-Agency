@@ -26,11 +26,11 @@ export function Missions() {
           start: 'top 80%',
           toggleActions: 'play none none reverse'
         },
-        y: 50,
-        opacity: 0,
-        duration: 1,
+        y: 20,
+        opacity: 0.8, // Start slightly visible to avoid blank screen
+        duration: 0.8,
         stagger: 0.1,
-        ease: 'power4.out'
+        ease: 'power3.out'
       })
     }, containerRef)
 
@@ -45,7 +45,7 @@ export function Missions() {
         backgroundSize: '40px 40px'
       }}></div>
       
-      <div className="max-w-7xl auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
           <div>
             <span className="text-red-600 font-mono text-sm tracking-widest uppercase mb-2 block">Tactical Status</span>

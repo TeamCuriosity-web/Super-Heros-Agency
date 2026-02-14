@@ -15,7 +15,7 @@ const heroes = [
     name: 'BRUCE',
     name2: 'BANNER',
     subtitle: 'The Gamma Giant',
-    description: 'Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green behemoth powered by his rage.',
+    description: 'Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green titan powered by his rage.',
     stats: { strength: '100/100', speed: 'Mach 4', tech: 'Gamma' },
     theme: 'from-green-600/30 via-white to-white',
     strokeColor: '#16a34a',
